@@ -4,8 +4,6 @@ import com.example.SummerProject.dto.UserDto;
 import com.example.SummerProject.entity.User;
 import com.example.SummerProject.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -25,10 +23,10 @@ public class UserService {
     */
     public User create(UserDto userDto) {
         String id = userDto.getId();
-        log.info("DTO의 아이디"+ id);
+        log.info("DTO의 아이디" + id);
 
         Optional<User> target = userRepository.findById(id);
-        log.info("Target"+ target);
+        log.info("Target" + target);
 
         target.ifPresent(m -> {
             throw new IllegalStateException("이미 존재하는 회원입니다!");
@@ -39,18 +37,33 @@ public class UserService {
 
         //2. repository에게 entity를 디비에 저장하게 시킴
         User saved = userRepository.save(user);
-        log.info("Service 정상"+ saved.toString());
 
         return saved;
 
     }
+
     // 닉네임 중복확인
-    public boolean existsByNickname(String nickname){
+    public boolean existsByNickname(String nickname) {
 
         boolean result = userRepository.existsByNickname(nickname);
 
         return result;
     }
 
+    // 로그인
+    public String login(UserDto userDto) {
 
+        String id = userDto.getId();
+        log.info("아이디값가져오니???`12123123? "+id);
+
+        Optional<User> result = userRepository.findById(id);
+        log.info("아이디값가져오니???? "+result);
+
+        if(result!=null){
+            log.info("여기까지오는거니??????");
+            return id;
+        }
+        else
+            return null;
+    }
 }

@@ -1,0 +1,39 @@
+{{>Loginlayouts/header}}
+
+
+{{>layouts/footer}}
+
+<script>
+
+    // 로그아웃 버튼 변수화
+    const LogOutButton = document.querySelector("#logoutButton");
+
+    LogOutButton.addEventListener("click", function () {
+        const sessionId = {
+            sessionUserId: sessionStorage.getItem("sessionId")
+        }
+        const url = "/logOut";
+
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify(sessionId),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            if (response.ok) {
+                alert("로그아웃 되었습니다!");
+                location.assign("/main");
+
+            } else
+                alert("로그아웃에 실패하였습니다!");
+        }).catch(err => {
+            console.log(err);
+        })
+
+    });
+
+</script>
+
+
+
