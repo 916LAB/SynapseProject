@@ -3,7 +3,6 @@ package com.example.SummerProject.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
