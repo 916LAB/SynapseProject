@@ -67,6 +67,15 @@ public class UserApiController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
     }
+    /*
+    로그 아웃
+     */
+    @PostMapping("/logOut")
+    public ResponseEntity<Boolean> logout(HttpSession session){
+        session.invalidate();
+        return ResponseEntity.status(HttpStatus.OK).body(true);
+
+    }
 
 
 }
