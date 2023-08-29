@@ -17,13 +17,16 @@ import java.util.UUID;
 public class ChatRoomDto {
 
     public String roomid;
-
+    public String person1;
+    public String person2;
     //음.. 채팅 상대 정보가 있어야하나..?
     public ChatRoomDto(){
         this.roomid = UUID.randomUUID().toString();
+        this.person1 = "person1";
+        this.person2 = "person2";
     }
-    public Chatroom toEntity(){
-        return new Chatroom(roomid);
 
+    public Chatroom toEntity(){
+        return new Chatroom(roomid,person1,person2);
     }
 }

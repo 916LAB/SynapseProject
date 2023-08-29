@@ -2,7 +2,9 @@ package com.example.SummerProject.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /*
     기능 : 메시지 엔티티
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @NoArgsConstructor
+@Setter
 public class Message {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
