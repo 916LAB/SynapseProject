@@ -26,10 +26,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mustache'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+<<<<<<< HEAD
 	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.0.4'
+=======
+	implementation 'org.webjars:sockjs-client:1.1.2'
+	implementation 'org.webjars:stomp-websocket:2.3.3-1'
+>>>>>>> 1621b034ac7f2f6ca0bced0b8055fb75878ab91f
 }
 
 tasks.named('test') {

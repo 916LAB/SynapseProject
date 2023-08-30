@@ -1,22 +1,32 @@
-/*
 package com.example.SummerProject.dto;
 
-import com.example.SummerProject.entity.UserEntity;
-import lombok.Getter;
-import lombok.Setter;
+import com.example.SummerProject.entity.User;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
-    private String ID;
-    private String PW;
-    private String gen;
-    private String number;
-    private String name;
+    @NotBlank
+    @Email
+    private String id;
 
-    public UserEntity toEntity(String ID,String PW,String gen,String number,String name){
+    @NotBlank
+    private String pw;
 
-        return new UserEntity(ID,PW,gen,number,name);
+    @NotBlank
+    private String nickname;
+
+    public User toEntity() {
+        return User.builder()
+                .id(id)
+                .pw(pw)
+                .nickname(nickname)
+                .build();
     }
+
 }
-*/
+

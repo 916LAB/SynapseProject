@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>채팅 화면</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/chat.js"></script>
+</head>
+<body>
+<!-- 상단 바 -->
+<div class="main-navbar">
+    <!-- 메인 페이지로 이동 버튼 -->
+    <a href="/" class="nav-button"><i class="fa fa-home"></i></a>
+</div>
+
+<!-- 대화상대 리스트와 채팅 뷰 영역 -->
+<div class="chat-container">
+    <!-- 대화상대 리스트 -->
+    <div class="chat-list">
+        <h3>대화상대</h3>
+        <ul>
+            <li>상대방 1</li>
+            <li>상대방 2</li>
+            <li>상대방 3</li>
+            <li>상대방 3</li>
+            <li>상대방 3</li>
+        </ul>
+    </div>
+
+    <!-- 채팅 뷰 페이지 -->
+    <div class="chat-view">
+        <!-- 채팅 상대 이름 표시 -->
+        <div class="chat-navbar">
+            <span class="chat-partner-name">상대방 1</span>
+        </div>
+        <div class="chat-history">
+            <!-- 여기에 채팅 내용이 추가됩니다 -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id = "chat-input" placeholder="메시지를 입력하세요">
+            <button id = "sendMessageButton">전송</button>
+        </div>
+    </div>
+</div>
+
+<!-- CSS -->
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .main-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background-color: #0dcaf0;
+        box-shadow: 0px 3px 5px 0px #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 20px;
+    }
+
+    .nav-button {
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .nav-button .fa {
+        margin-right: 5px;
+    }
+
+    .chat-container {
+        display: flex;
+        height: calc(100% - 50px);
+        padding-top: 50px;
+    }
+
+    .chat-list {
+        width: 300px;
+        padding-right: 20px;
+        border-right: 1px solid #ccc;
+        overflow-y: scroll;
+    }
+
+    .chat-list h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .chat-list ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .chat-list li {
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        background-color: #f0f0f0;
+        transition: background-color 0.2s;
+    }
+
+    .chat-list li:hover {
+        background-color: #e0e0e0;
+    }
+
+    .chat-view {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: calc(100% - 300px);
+        height: 100%;
+    }
+
+    .chat-navbar {
+        height: 50px;
+        background-color: #fafafa;
+        box-shadow: 0px 3px 5px 0px #ccc;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .chat-history {
+        flex: 1 1 auto;
+        overflow-y: scroll;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .chat-input {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        padding: 10px 20px;
+        border-radius: 10px;
+        box-shadow: 0px 3px 5px 0px #ccc;
+    }
+
+    .chat-input input {
+        flex: 1;
+        margin-right: 10px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+    }
+
+    .chat-input button {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        border: none;
+        background-color: #333;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .chat-input button:hover {
+        background-color: #444;
+    }
+</style>
+</body>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <!-- Bootstrap CSS and JS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="/css/Message.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+    <div class="row vh-100">
+        <aside class="col-4 px-0 vh-100">
+            <div class="list-group list-group-flush vh-100" id="contacts-list">
+                <!-- Contact list will be populated here -->
+            </div>
+        </aside>
+        <main class="col-8 px-0 vh-100">
+            <div class="card" id="chat-container">
+                <div class="card-header" id="chat-header">
+                    <!-- Chat name will be shown here -->
+                </div>
+                <div class="card-body" id="chat-body">
+                    <!-- Chat messages will be shown here -->
+                </div>
+                <div class="card-footer">
+                    <form id="message-form" class="d-flex">
+                        <input type="text" class="form-control mr-2" id="message-input"
+                               placeholder="Type your message...">
+                        <button class="btn btn-primary" id="send-button">Send</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Custom JavaScript -->
+<script src="./js/chat.js"></script>
+</body>
+
+</html>
