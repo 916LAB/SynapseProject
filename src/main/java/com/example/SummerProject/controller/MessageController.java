@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 /*
@@ -25,8 +27,10 @@ public class MessageController {
 
     @Autowired
     private ChatRoomRepository chatRoomRepository;
-    @MessageMapping("/chat")
-    @SendTo("/sub/greetings") // 목적지 여기로 DTO 를 보내 화면에 표시
+
+    // 메시지 전송시 처리
+    @MessageMapping("/{roomId}")
+    @SendTo("/pub/{roomId}") // 목적지 여기로 DTO 를 보내 화면에 표시
     public MessageDto send(MessageDto dto){
         log.info(String.valueOf(dto));
 

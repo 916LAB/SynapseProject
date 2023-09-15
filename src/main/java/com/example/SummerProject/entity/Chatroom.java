@@ -1,6 +1,7 @@
 package com.example.SummerProject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -29,6 +30,7 @@ public class Chatroom {
     private String person2;
 
     @OneToMany(mappedBy = "chatRoom")
+    @JsonManagedReference
     private Set<Message> messages;
 
     @Builder
