@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>채팅 화면</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -7,11 +7,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="/js/chat.js"></script>
 </head>
-<body>
+<body data-session-id="{{sessionId}}">
 <!-- 상단 바 -->
 <div class="main-navbar">
     <!-- 메인 페이지로 이동 버튼 -->
-    <a href="/" class="nav-button"><i class="fa fa-home"></i></a>
+    <a href="/main" class="nav-button"><i class="fa fa-home"></i></a>
 </div>
 
 <!-- 대화상대 리스트와 채팅 뷰 영역 -->
@@ -20,22 +20,29 @@
     <div class="chat-list">
         <h3>대화상대</h3>
         <ul>
-            <li>상대방 1</li>
-            <li>상대방 2</li>
-            <li>상대방 3</li>
-            <li>상대방 3</li>
-            <li>상대방 3</li>
+            {{#list}}
+                <li>{{.}}</li>
+            {{/list}}
         </ul>
     </div>
-
+    <input type="hidden" id="hid-roomid" value="{{chatroom}}"/>
     <!-- 채팅 뷰 페이지 -->
     <div class="chat-view">
         <!-- 채팅 상대 이름 표시 -->
         <div class="chat-navbar">
-            <span class="chat-partner-name">상대방 1</span>
+            <span class="chat-partner-name"></span>
         </div>
         <div class="chat-history">
-            <!-- 여기에 채팅 내용이 추가됩니다 -->
+            <div class="message my-message">
+                <div class="message-content">
+                    <p>Hello, this is my message!</p>
+                </div>
+            </div>
+            <div class="message other-message">
+                <div class="message-content">
+                    <p>Hello, this is the other person's message!</p>
+                </div>
+            </div>
         </div>
         <div class="chat-input">
             <input type="text" id = "chat-input" placeholder="메시지를 입력하세요">

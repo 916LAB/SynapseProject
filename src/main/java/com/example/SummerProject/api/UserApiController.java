@@ -1,6 +1,5 @@
 package com.example.SummerProject.api;
 
-import ch.qos.logback.core.model.Model;
 import com.example.SummerProject.dto.UserDto;
 import com.example.SummerProject.entity.User;
 import com.example.SummerProject.service.UserService;
@@ -10,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -49,7 +49,7 @@ public class UserApiController {
     로그인
      */
     @PostMapping("/MainPage")
-    public ResponseEntity<Boolean> login(@RequestBody UserDto userDto, HttpServletRequest request) {
+    public ResponseEntity<Boolean> login(@RequestBody UserDto userDto, HttpServletRequest request, Model model) {
 
         String userSessionId = userService.login(userDto);
 
@@ -58,6 +58,9 @@ public class UserApiController {
 
         // 세션에 로그인 회원 아이디 정보 보관
         session.setAttribute("sessionId", userSessionId);
+
+        // 모델에 값 추가
+        model.addAttribute("sessionId", userSessionId);
 
         // 세션 유효시간 지정
         session.setMaxInactiveInterval(3000);

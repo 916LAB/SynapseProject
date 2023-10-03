@@ -18,6 +18,7 @@ public class MessageDto {
     public String content;
     public String sender;
     public String reciver;
+    public String roomid;
     public Message toEntity(){
         return new Message(content,sender,reciver);
     }

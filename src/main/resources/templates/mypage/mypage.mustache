@@ -1,9 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
 
-<nav>
-    <div>
-        <h1>대충 닉네임</h1>
-        <form action="/chat">
-            <button>메시지 보내기</button>
-        </form>
-    </div>
-</nav>
+<h2>사용자 목록</h2>
+
+<div id="userList">
+    {{#users}}
+        <p>{{id}}</p>
+        <button onclick="window.location.href='/chatroom/{{id}}'">채팅하기</button>
+    {{/users}}
+</div>
+
+</body>
+</html>

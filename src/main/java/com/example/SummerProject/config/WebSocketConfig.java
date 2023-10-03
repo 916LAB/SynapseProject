@@ -21,8 +21,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
         // 발행자가 "/app" 경로로 메시지를 주면 가공해서 구독자들에게 전달
         registry.setApplicationDestinationPrefixes("/app");
-        // 구독 경로 설정. 구독자가 "/pub" 경로로 메시지를 구독함
 
+        // 구독 경로 설정. 구독자가 "/pub" 경로로 메시지를 구독함
         registry.enableSimpleBroker("/pub");
     }
     @Override
